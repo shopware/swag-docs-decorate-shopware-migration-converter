@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="SwagMigrationExtendConverterExample\Profile\Shopware\Premapping\ManufacturerReader">
+            <argument type="service" id="product_manufacturer.repository"/>
+            <argument type="service" id="SwagMigrationAssistant\Migration\Gateway\GatewayRegistry"/>
+            <tag name="shopware.migration.pre_mapping_reader"/>
+        </service>
+
+        <service id="SwagMigrationExtendConverterExample\Profile\Shopware\Converter\Shopware55DecoratedProductConverter"
+                 decorates="SwagMigrationAssistant\Profile\Shopware55\Converter\Shopware55ProductConverter">
+            <argument type="service" id="SwagMigrationExtendConverterExample\Profile\Shopware\Converter\Shopware55DecoratedProductConverter.inner"/>
+            <argument type="service" id="SwagMigrationAssistant\Migration\Mapping\MappingService"/>
+        </service>
+    </services>
+</container>

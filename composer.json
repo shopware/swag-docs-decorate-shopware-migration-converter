@@ -1,0 +1,31 @@
+{
+  "name": "swag/migration-extend-converter-example",
+  "description": "Extend a Shopware Migration Assistant converter",
+  "version": "v1.0.0",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "shopware AG"
+    }
+  ],
+  "require": {
+    "shopware/platform": "*"
+  },
+  "extra": {
+    "shopware-plugin-class": "SwagMigrationExtendConverterExample\\SwagMigrationExtendConverterExample",
+    "label": {
+      "de-DE": "Converter-Erweiterungsbeispiel",
+      "en-GB": "Extend a converter example"
+    },
+    "description": {
+      "de-DE": "Erweiterung eines Shopware-Migrationsassistenten-Converters",
+      "en-GB": "Extend a Shopware Migration Assistant converter"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "SwagMigrationExtendConverterExample\\": "src/"
+    }
+  }
+}

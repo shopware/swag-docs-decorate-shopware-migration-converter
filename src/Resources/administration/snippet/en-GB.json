@@ -1,0 +1,11 @@
+{
+    "swag-migration": {
+        "index": {
+            "premappingCard": {
+                "group": {
+                    "swag_manufacturer": "Manufacturer"
+                }
+            }
+        }
+    }
+}
