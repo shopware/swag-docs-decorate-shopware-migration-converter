@@ -35,6 +35,11 @@ class Shopware55DecoratedProductConverter implements ConverterInterface
         return $this->originalProductConverter->supports($migrationContext);
     }
 
+    public function getSourceIdentifier(array $data): string
+    {
+        return $this->originalProductConverter->getSourceIdentifier($data);
+    }
+
     public function writeMapping(Context $context): void
     {
         $this->originalProductConverter->writeMapping($context);
@@ -53,7 +58,7 @@ class Shopware55DecoratedProductConverter implements ConverterInterface
         $manufacturerId = $data['manufacturer']['id'];
         unset($data['manufacturer']);
 
-        $manufacturerUuid = $this->mappingService->getUuid(
+        $mapping = $this->mappingService->getMapping(
             $migrationContext->getConnection()->getId(),
             ManufacturerReader::getMappingName(),
             $manufacturerId,
@@ -62,12 +67,12 @@ class Shopware55DecoratedProductConverter implements ConverterInterface
 
         $convertedStruct = $this->originalProductConverter->convert($data, $context, $migrationContext);
 
-        if ($manufacturerUuid === null) {
+        if ($mapping === null) {
             return $convertedStruct;
         }
 
         $converted = $convertedStruct->getConverted();
-        $converted['manufacturerId'] = $manufacturerUuid;
+        $converted['manufacturerId'] = $mapping['entityUuid'];
 
         return new ConvertStruct($converted, $convertedStruct->getUnmapped());
     }
