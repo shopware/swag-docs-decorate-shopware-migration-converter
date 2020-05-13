@@ -40,6 +40,11 @@ class Shopware55DecoratedProductConverter implements ConverterInterface
         return $this->originalProductConverter->getSourceIdentifier($data);
     }
 
+    public function getMediaUuids(array $converted): ?array
+    {
+        return $this->originalProductConverter->getMediaUuids($converted);
+    }
+
     public function writeMapping(Context $context): void
     {
         $this->originalProductConverter->writeMapping($context);
