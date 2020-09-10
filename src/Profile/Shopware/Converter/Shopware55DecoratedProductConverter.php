@@ -5,29 +5,28 @@ namespace SwagMigrationExtendConverterExample\Profile\Shopware\Converter;
 use Shopware\Core\Framework\Context;
 use SwagMigrationAssistant\Migration\Converter\ConverterInterface;
 use SwagMigrationAssistant\Migration\Converter\ConvertStruct;
+use SwagMigrationAssistant\Migration\Logging\LoggingServiceInterface;
 use SwagMigrationAssistant\Migration\Mapping\MappingServiceInterface;
+use SwagMigrationAssistant\Migration\Media\MediaFileServiceInterface;
 use SwagMigrationAssistant\Migration\MigrationContextInterface;
+use SwagMigrationAssistant\Profile\Shopware\Converter\ProductConverter;
 use SwagMigrationExtendConverterExample\Profile\Shopware\Premapping\ManufacturerReader;
 
-class Shopware55DecoratedProductConverter implements ConverterInterface
+class Shopware55DecoratedProductConverter extends ProductConverter
 {
     /**
      * @var ConverterInterface
      */
     private $originalProductConverter;
 
-    /**
-     * @var MappingServiceInterface
-     */
-    private $mappingService;
-
-    public function __construct
-    (
+    public function __construct(
         ConverterInterface $originalProductConverter,
-        MappingServiceInterface $mappingService
+        MappingServiceInterface $mappingService,
+        LoggingServiceInterface $loggingService,
+        MediaFileServiceInterface $mediaFileService
     ) {
+        parent::__construct($mappingService, $loggingService, $mediaFileService);
         $this->originalProductConverter = $originalProductConverter;
-        $this->mappingService = $mappingService;
     }
 
     public function supports(MigrationContextInterface $migrationContext): bool
